@@ -10,11 +10,16 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  background: darkslategrey;
 }
 
 body {
   font-family: sans-serif;
   background-color: #f9fbfd;
+}
+
+h2 {text-align: center;
+  color: hsl(360, 91%, 36%);
 }
 
 .wrapper {
@@ -52,6 +57,7 @@ header {
 
 .card-body {
   min-height: 100px;
+  
 }
 
 .card-footer {
@@ -112,7 +118,7 @@ button[disabled] {
   text-align: center;
   margin-top: 10px;
   margin-bottom: 10px;
-  border: 2px dashed #c0c7cf;
+  border: 2px double #c0c7cf;
   border-radius: 6px;
   resize: none;
   overflow: hidden;
