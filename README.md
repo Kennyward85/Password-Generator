@@ -19,7 +19,7 @@ a prompt for password length will apear starting the code to proceed
 6.for some of the things I wasnt sure about I relied on w3schools
   (https://www.w3schools.com/jsref/jsref_parseint.asp#:~:text=Definition%20and%20Usage,number%20to%20a%20decimal%20number.)
 
-Definition:
+Definition: 
 
 The parseInt() function parses a string and returns an integer.
 
