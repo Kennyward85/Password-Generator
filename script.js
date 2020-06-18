@@ -17,7 +17,7 @@ var choices;
 // converts letters to uppercase 
 var toUpper = function (x) {
   return x.toUpperCase();
-};
+}; 
 //Turns the lowercaser array into Uppercase
 ABC2 = ABC.map(toUpper);
 
