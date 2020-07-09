@@ -54,3 +54,6 @@ Note: this method does not change the original array.
 Definition:
 Arrow function expression is a syntactically compact alternative to a regular function expression, although without its own bindings to the this, arguments, super, or new.target keywords. Arrow function expressions are ill suited as methods, and they cannot be used as constructors.
 <!-- Only used the Arror function in one location -->
+
+
+https://kennyward85.github.io/Password-Generator/
