@@ -1,119 +1,94 @@
-//Variables
-var enter;
-var confirmNum;
-var confirmSymb;
-var confirmUppercase;
-var confirmLowercase;
-// Arrays
-ABC = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
-symb = [ "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "=", "+", "[", "{", "]", "}", ";", ":", ",", "<", ".", ">", "/", "?", "`", "~"];
-
-num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-//for turning the letters into uppercase if only this option is selected
-upper = [];
-// Defines their choices 
-var choices;
-// converts letters to uppercase 
-var toUpper = function (x) {
-  return x.toUpperCase();
-};  
-//Turns the lowercaser array into Uppercase
-ABC2 = ABC.map(toUpper);
-
-var get = document.querySelector("#generate");
-// even listener for when we click  generate password used arrow function here 
-get.addEventListener("click", () => {
-  pass = generatePassword();
-  document.getElementById("password").placeholder = pass;
+//  variable arrays
+var response = [];
+var abc = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var ABC = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var symb = [ "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "=", "+", "[", "{", "]", "}", ";", ":", ",", "<", ".", ">", "/", "?", "`", "~"];
+var num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+var generate = document.querySelector("#generate");
+var clear = document.querySelector("#clear");
+// The on click event recalls the function and ends with returning the combined password
+// in the password text area
+generate.addEventListener("click", () => {
+    document.getElementById("password").placeholder = createPass();     
 });
-
-
-function generatePassword() {
-  enter = parseInt(prompt("How many characters would you like your password? Choose between 8 and 128"));
-  // If nothing is entered 
-  if (!enter) {
-    alert("This needs a value");
-  } else if (enter < 8 || enter > 128) {
-    //If it does not contain the right amount of chars
-    enter = parseInt(prompt("You must choose between 8 and 128"));
-
-  } else {
-    confirmNum = confirm("Will this contain numbers?");
-    confirmSymb = confirm("Will this contain special characters?");
-    confirmUppercase = confirm("Will this contain Uppercase letters?");
-    confirmLowercase = confirm("Will this contain Lowercase letters?");
-  };
-  // If they choose no to all 
-  if (!confirmSymb && !confirmNum && !confirmUppercase && !confirmLowercase) {
-    choices = alert("You must choose a criteria!");
-
-  }
-  // If all 4
-  else if (confirmSymb && confirmNum && confirmUppercase && confirmLowercase) {
-
-    choices = symb.concat(num, ABC2, ABC);
-  }
-  // If 3 of 4
-  else if (confirmSymb && confirmNum && confirmLowercase) {
-    choices = symb.concat(num, ABC);
-  }
-  else if (confirmSymb && confirmNum && confirmUppercase) {
-    choices = symb.concat(num, ABC2);
-  }
-  else if (confirmSymb && confirmLowercase && confirmUppercase) {
-    choices = symb.concat(ABC, ABC2);
-  }
-  else if (confirmNum && confirmLowercase && confirmUppercase) {
-    choices = num.concat(ABC, ABC2);
-  }
-  // If 2 of 4
-  else if (confirmNum && confirmSymb) {
-    choices = num.concat(symb);
-
-  } else if (confirmNum && confirmUppercase) {
-    choices = num.concat(ABC2);
-
-  } else if (confirmLowercase && confirmNum) {
-    choices = ABC.concat(num);
-
-  } else if (confirmSymb && confirmUppercase) {
-    choices = symb.concat(ABC2);
-
-  } else if (confirmSymb && confirmLowercase) {
-    choices = symb.concat(ABC);
-
-  } else if (confirmLowercase && confirmUppercase) {
-    choices = ABC.concat(ABC2);
-  }
-  // If just 1
-  else if (confirmNum) {
-    choices = num;
- 
-  } else if (confirmSymb) {
-    choices = symb;
-
-  } else if (confirmLowercase) {
-    choices = ABC;
-
-  } else if (confirmUppercase) {
-    choices = upper.concat(ABC2);
-  };
-
-  // password placeholder 
-  var password = [];
-  // Random selection for all variables
-  for (var i = 0; i < enter; i++) {
-    var pickChoices = choices[Math.floor(Math.random() * choices.length)];
-    password.push(pickChoices);
-  }
-
-  var pass = password.join("");
-  UserInput(pass);
-  return pass;
-}
-
-function UserInput(pass) {
-  document.getElementById("password").textContent = pass;
-
-}
+// deletes the input for the password to create a new one
+clear.addEventListener("click", () =>{
+document.getElementById("password").placeholder = "";
+});
+function createPass(){
+    // ParseInt is required to take a number in as a string
+    selected = parseInt(prompt("Pick between 8 and 128 Characters"))
+//    if you dont recall the function in line 17 it will error after picking a number outside 8 and 128 more than once
+   if(selected < 8 || selected > 128) {
+   selected = parseInt(prompt("Must be between 8 and 128 Characters")) 
+   createPass();
+   }else  {
+        upperCase = confirm("Will there be Uppercase Characters?");
+        lowerCase = confirm("Will there be Lowercase Characters?");
+        number = confirm("Will this contain numbers?");
+        symbol = confirm("Will there be Special Characters/Symbols?");
+    };
+    // calling the function again here restarts the prompt until proper selections are made
+if ( upperCase === false && lowerCase === false && number === false && symbol === false)
+    {
+       alert("Must select at least 1 option");
+       createPass();
+    };
+// These decide which prompts were confirmed true 
+// if more than one, combines the strings of the selected arrays
+     if ( upperCase === true) {
+        combinedArray = ABC;
+    } 
+     if ( lowerCase === true) {
+        combinedArray = abc;
+    }
+     if ( number === true) {
+        combinedArray = num;
+    } 
+      if ( symbol === true) {
+        combinedArray = symb;
+     }
+      if (upperCase === true && lowerCase === true) {
+         combinedArray = abc.concat(ABC);
+     }
+      if (upperCase === true && symbol === true){
+         combinedArray = ABC.concat(symb);
+     }
+      if (upperCase === true && number === true ) {
+         combinedArray = ABC.concat(num);
+     }
+      if ( lowerCase === true && symbol === true) {
+         combinedArray = abc.concat(symb);
+     }
+      if(lowerCase === true && number === true) {
+         combinedArray = abc.concat(num);
+     }
+      if (number === true && symbol === true) {
+         combinedArray =num.concat(symb);
+     }
+      if (upperCase === true && lowerCase === true && number === true){
+         combinedArray = ABC.concat(abc, num);
+     }
+      if(upperCase === true && lowerCase === true && symbol === true) {
+         combinedArray = ABC.concat(abc, symb);
+     }
+      if(upperCase === true && number === true && symbol === true) {
+         combinedArray = ABC.concat(num, symb);
+     }
+      if(lowerCase === true && number === true && symbol === true) {
+         combinedArray = abc.concat(num, symb);
+     }
+      if (upperCase === true && lowerCase === true && number === true && symbol === true){
+         combinedArray = ABC.concat(abc, num, symb);
+     };
+//  Finally this loops through the selected choices and randomizes what it picks 
+// based off the number (selected)
+    for(var i = 0; i < selected; i++) {
+        selection = combinedArray[Math.floor(Math.random() * combinedArray.length)];
+        response.push(selection);
+       }
+    // This is outside the for loop  it combines the the strings of the different arrays
+    // and returns the password
+     combined = response.join("")
+        return combined;
+        }
